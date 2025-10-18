@@ -21,7 +21,6 @@ This app lets you add, edit, delete, and mark tasks as completed — with persis
 ✅ Delete tasks  
 ✅ Mark tasks as completed / pending  
 ✅ Filter tasks (All / Completed / Pending)  
-✅ Auto-save to localStorage (persistent across refresh)  
 ✅ Clean modular structure (Components, Hooks, Utils)  
 ✅ Responsive design  
 
