@@ -9,7 +9,6 @@ This app lets you add, edit, delete, and mark tasks as completed — with persis
 
 - ⚛️ **React (Vite)**
 - 🧠 **Custom Hooks (useTask)**
-- 💾 **localStorage** for persistence
 - 💅 **CSS3** (responsive design)
 - 🧰 **JavaScript (ES6+)**
 
