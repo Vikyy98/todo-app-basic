@@ -1,6 +1,9 @@
 import useTask from "../../Hooks/useTask";
 import TaskItem from "./TaskItem";
 import AddTask from "./AddTask";
+import { createContext } from "react";
+
+export const TaskContext = createContext();
 
 const TaskList = () => {
   const {
@@ -17,6 +20,9 @@ const TaskList = () => {
     handleToggleForm,
   } = useTask();
 
+  const filteredTasks =
+    filter === "all" ? tasks : tasks.filter((task) => task.status === filter);
+
   return (
     <>
       <section>
@@ -31,17 +37,21 @@ const TaskList = () => {
           </select>
         </div>
         <div className="tasksContainer">
-          <TaskItem
-            handleEdit={handleEdit}
-            tasks={
-              filter === "all"
-                ? tasks
-                : tasks.filter((task) => task.status === filter)
-            }
-            handleDelete={handleDelete}
-            handleChecked={handleChecked}
-            filter={filter}
-          />
+          <TaskContext.Provider
+            value={{
+              state: {
+                filter,
+                tasks: filteredTasks,
+              },
+              actions: {
+                handleEdit,
+                handleDelete,
+                handleChecked,
+              },
+            }}
+          >
+            <TaskItem />
+          </TaskContext.Provider>
         </div>
       </section>
       <div>

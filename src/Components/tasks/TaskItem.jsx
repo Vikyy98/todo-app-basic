@@ -1,33 +1,31 @@
 import { FaTrash, FaEdit } from "react-icons/fa";
+import { TaskContext } from "./TaskList";
+import { useContext } from "react";
 
-const TaskItem = ({
-  handleEdit,
-  tasks,
-  handleDelete,
-  handleChecked,
-  filter,
-}) => {
+const TaskItem = () => {
+  const { state, actions } = useContext(TaskContext);
+
   return (
     <>
-      {tasks.length === 0 && filter === "all" && (
+      {state.tasks.length === 0 && state.filter === "all" && (
         <p className="noTasks">No tasks available. Please add a task.</p>
       )}
 
-      {tasks.length === 0 && filter === "pending" && (
+      {state.tasks.length === 0 && state.filter === "pending" && (
         <p className="noTasks">
           No tasks available in pending status. All the task are completed.
         </p>
       )}
 
-      {tasks.length === 0 && filter === "completed" && (
+      {state.tasks.length === 0 && state.filter === "completed" && (
         <p className="noTasks">
           No tasks available in completion status. All the task are pending.
         </p>
       )}
 
-      {tasks.length > 0 && (
+      {state.tasks.length > 0 && (
         <ul>
-          {tasks.map((task) => (
+          {state.tasks.map((task) => (
             <li
               key={task.id}
               className={`taskItem ${
@@ -41,7 +39,7 @@ const TaskItem = ({
                   type="checkbox"
                   className="taskCheckbox"
                   checked={task.status === "pending" ? false : true}
-                  onChange={() => handleChecked(task.id)}
+                  onChange={() => actions.handleChecked(task.id)}
                 />
                 <div className="taskDetails">
                   <h4> {task.title} </h4>
@@ -51,13 +49,13 @@ const TaskItem = ({
               <div className="taskItemRight">
                 <button
                   className="deleteTask"
-                  onClick={() => handleDelete(task.id)}
+                  onClick={() => actions.handleDelete(task.id)}
                 >
                   <FaTrash />
                 </button>
                 <button
                   className="editTask"
-                  onClick={() => handleEdit(task.id)}
+                  onClick={() => actions.handleEdit(task.id)}
                 >
                   <FaEdit />
                 </button>
